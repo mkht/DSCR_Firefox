@@ -28,14 +28,15 @@ Install Firefox
 
 + [string] **MachineBits** (Optional):
     + Specify the machine's operating system bit number.
-    + The default is `x86`.
+    + The default is `x86`. (`x86` or `x64`)
 
 + [string] **InstallDirectoryName** (Optional):
-    + The name of the directory where the Firefox will be installed in the system's program files directory.
-    + If this value is specified then InstallDirectoryPath will be ignored.
+    + The name of the directory where the Firefox will be installed.
+    + If this value is specified then `InstallDirectoryPath` will be ignored.
 
 + [string] **InstallDirectoryPath** (Optional):
-    + The full path to the directory to install the Firefox.
+    + The full path of the directory to install the Firefox.
+    + If the both `InstallDirectoryPath` and `InstallDirectoryName` not specified, the Firefox will be installed in the system's program files directory.
 
 + [bool] **QuickLaunchShortcut** (Optional):
     + Create a shortcut for the Firefox in the QuickLaunch directory.
@@ -81,12 +82,12 @@ Manage bookmarks.
 
 + [string] **Type** (Optional):
     + Specify the type of the item.
-    + Link / Separator / Folder
+    + `Link` / `Separator` / `Folder`
     + The default is `Link`
 
 + [string] **BookmarksLocation** (Optional):
     + The location of the bookmark
-    + BookmarksMenu / BookmarksToolbar / BookmarksFolder-(FolderId)
+    + `BookmarksMenu` / `BookmarksToolbar` / `BookmarksFolder-(FolderId)`
     + The default is `BookmarksMenu`
 
 + [int] **Position** (Optional):
@@ -102,7 +103,7 @@ Manage bookmarks.
 
 + [int] **FolderId** (Optional):
     + The ID of the folder.
-    + This value only respect when the item type is Folder.
+    + This value only respect when the item type is `Folder`.
     + The default is `1`
 
 + [string] **FirefoxDirectory** (Optional):
@@ -136,7 +137,7 @@ Configuration Example1
 
 + [string] **PrefType** (Optional):
     + The type of the preference.
-    + pref / defaultPref / lockPref / cleanPref / LocalizablePreferences
+    + `pref` / `defaultPref` / `lockPref` / `cleanPref` / `LocalizablePreferences`
     + The default is `pref`
 
 |Type|detail|
