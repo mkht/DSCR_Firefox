@@ -22,6 +22,7 @@
         [string] $FirefoxDirectory = "C:\Program Files\Mozilla Firefox"
     )
 
+    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName DSCR_IniFile
 
     $MozIniPath = Join-Path $FirefoxDirectory "\distribution\distribution.ini"

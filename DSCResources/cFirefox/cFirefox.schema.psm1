@@ -29,6 +29,7 @@
     )
 
     Import-DscResource -ModuleName xPSDesiredStateConfiguration
+    Import-DscResource -ModuleName PSDesiredStateConfiguration
 
     if ($MachineBits -eq "x64") {
         $OS += "64"
