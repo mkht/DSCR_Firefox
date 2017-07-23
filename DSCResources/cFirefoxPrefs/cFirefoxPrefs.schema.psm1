@@ -48,6 +48,20 @@
         about   = 'DSC-Customized'
     }
 
+    Script Check_FireFoxDirectory
+    {
+        GetScript = {
+        }
+        TestScript = {
+            if(-not (Test-Path (Join-Path $using:FirefoxDirectory 'FireFox.exe') -PathType Leaf)){
+                Write-Warning ('"FireFox.exe" does not exist in "{0}". Please confirm FireFoxDirectory' -f $using:FirefoxDirectory)
+            }
+            $true
+        }
+        SetScript = {
+        }
+    }
+
     if (($PrefType -eq 'pref') -or ($PrefType -eq 'LocalizablePreferences')) {
         cIniFile Global_Id
         {

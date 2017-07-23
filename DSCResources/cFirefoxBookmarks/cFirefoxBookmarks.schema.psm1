@@ -30,6 +30,7 @@
         [string] $FirefoxDirectory = "C:\Program Files\Mozilla Firefox"
     )
 
+    Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName DSCR_IniFile
 
     $MozIniPath = Join-Path $FirefoxDirectory "\distribution\distribution.ini"
@@ -38,6 +39,20 @@
         id      = 'DSC-Customized'
         version = '1.0'
         about   = 'DSC-Customized'
+    }
+
+    Script Check_FireFoxDirectory
+    {
+        GetScript = {
+        }
+        TestScript = {
+            if(-not (Test-Path (Join-Path $using:FirefoxDirectory 'FireFox.exe') -PathType Leaf)){
+                Write-Warning ('"FireFox.exe" does not exist in "{0}". Please confirm FireFoxDirectory' -f $using:FirefoxDirectory)
+            }
+            $true
+        }
+        SetScript = {
+        }
     }
 
     cIniFile Global_Id
