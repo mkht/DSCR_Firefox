@@ -168,3 +168,5 @@ Configuration Example1
 
 ----
 ## ChangeLog
+### Unreleased
+ + Suppress Warning messages [#3](https://github.com/mkht/DSCR_Firefox/issues/3)
