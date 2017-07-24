@@ -12,7 +12,7 @@
     # RootModule = ''
 
     # このモジュールのバージョン番号です。
-    ModuleVersion     = '0.6.4'
+    ModuleVersion     = '0.7.0'
 
     # サポートされている PSEditions
     # CompatiblePSEditions = @()
@@ -51,7 +51,7 @@
     # ProcessorArchitecture = ''
 
     # このモジュールをインポートする前にグローバル環境にインポートされている必要があるモジュール
-    RequiredModules   = @( 'xPSDesiredStateConfiguration', 'DSCR_IniFile' )
+    RequiredModules   = @( 'DSCR_Application', 'DSCR_IniFile' )
 
     # このモジュールをインポートする前に読み込まれている必要があるアセンブリ
     # RequiredAssemblies = @()

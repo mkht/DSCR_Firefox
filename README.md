@@ -10,7 +10,7 @@ Install-Module -Name DSCR_Firefox
 ```
 
 ## Dependencies
-* [xPSDesiredStateConfiguration](https://github.com/PowerShell/xPSDesiredStateConfiguration)
+* [DSCR_Application](https://github.com/mkht/DSCR_Application)
 * [DSCR_IniFile](https://github.com/mkht/DSCR_IniFile)
 
 ----
@@ -168,5 +168,7 @@ Configuration Example1
 
 ----
 ## ChangeLog
-### Unreleased
- + Suppress Warning messages [#3](https://github.com/mkht/DSCR_Firefox/issues/3)
+### 0.7.0
+ + Add module dependency ([DSCR_Application](https://github.com/mkht/DSCR_Application))
+ + Remove module dependency (xPSDesiredStateConfiguration)
+ + Fix issue that the Download process runs even if FireFox has already been installed [#4](https://github.com/mkht/DSCR_Firefox/issues/4)
