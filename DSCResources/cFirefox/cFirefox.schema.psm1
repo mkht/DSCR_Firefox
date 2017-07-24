@@ -28,15 +28,14 @@
         $MaintenanceService = $true
     )
 
-    Import-DscResource -ModuleName xPSDesiredStateConfiguration
-    Import-DscResource -ModuleName PSDesiredStateConfiguration
+    Import-DscResource -ModuleName DSCR_Application
 
     if ($MachineBits -eq "x64") {
         $OS += "64"
     }
 
     $IniPath = "$env:SystemDrive\Windows\temp\DtlDownloads\Configuration.ini"
-    $IniContent = @(
+    [string[]]$IniContent = @(
         "[Install]",
         ("QuickLaunchShortcut=" + $QuickLaunchShortcut.ToString().toLower()),
         ("DesktopShortcut=" + $DesktopShortcut.ToString().toLower()),
@@ -50,39 +49,18 @@
         $IniContent += ("InstallDirectoryPath=" + $InstallDirectoryPath)
     }
 
-    xRemoteFile Downloader
+    cApplication Install
     {
-        Uri = "https://download.mozilla.org/?product=firefox-" + $VersionNumber + "&os=" + $OS + "&lang=" + $Language
-        DestinationPath = $LocalPath
-    }
-
-    Script InstallParams {
-        SetScript  = {
+        Name      = "Mozilla Firefox " + $VersionNumber + " (" + $MachineBits + " " + $Language + ")"
+        InstallerPath = "https://download.mozilla.org/?product=firefox-" + $VersionNumber + "&os=" + $OS + "&lang=" + $Language
+        Arguments = "-ms /INI=$IniPath"
+        PreAction = {
             $parent = (split-path -Path $using:IniPath -Parent)
             if (-not (Test-Path -Path $parent)) {
-                New-Item -Path $parent -ItemType Directory -Force
+                New-Item -Path $parent -ItemType Directory -Force | Out-Null
             }
             $using:IniContent -join "`r`n" | Out-File -FilePath $using:IniPath -Encoding ascii -Force
         }
-        TestScript = {
-            (Test-Path $using:IniPath) -and ((gc $using:IniPath -raw) -ceq ($using:IniContent -join "`r`n"))
-        }
-        GetScript  = {
-            @{
-                TestScript = $TestScript
-                SetScript  = $SetScript
-                GetScript  = $GetScript
-                Result     = ((Test-Path  $using:IniPath) -and ((gc $using:IniPath -raw) -ceq ($using:IniContent -join "`r`n")))
-            }
-        }
     }
 
-    Package Installer {
-        Ensure    = "Present"
-        Path      = $LocalPath
-        Name      = "Mozilla Firefox " + $VersionNumber + " (" + $MachineBits + " " + $Language + ")"
-        ProductId = ''
-        Arguments = "-ms /INI=$IniPath"
-        DependsOn = ("[xRemoteFile]Downloader", "[Script]InstallParams")
-    }
 }
