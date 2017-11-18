@@ -168,6 +168,9 @@ Configuration Example1
 
 ----
 ## ChangeLog
+### 0.7.1
+ + Fix issue [#7](https://github.com/mkht/DSCR_Firefox/issues/7) `cFirefoxPrefs` was not loaded some systems.
+
 ### 0.7.0
  + Add module dependency ([DSCR_Application](https://github.com/mkht/DSCR_Application))
  + Remove module dependency (xPSDesiredStateConfiguration)
