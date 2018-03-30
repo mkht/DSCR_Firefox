@@ -1,4 +1,4 @@
-Configuration cFirefox
+﻿Configuration cFirefox
 {
     param
     (
@@ -13,7 +13,7 @@ Configuration cFirefox
         [string]
         $MachineBits = "x86",
         [string]
-        $LocalPath = "$env:SystemDrive\Windows\temp\DtlDownloads\Firefox Setup " + $VersionNumber +".exe",
+        $LocalPath = "$env:SystemDrive\Windows\temp\DtlDownloads\Firefox Setup " + $VersionNumber + ".exe",
         [string]
         $InstallDirectoryName,
         [string]
@@ -42,10 +42,10 @@ Configuration cFirefox
         ("TaskbarShortcut=" + $TaskbarShortcut.ToString().toLower()),
         ("MaintenanceService=" + $MaintenanceService.ToString().toLower())
     )
-    if($InstallDirectoryName){
+    if ($InstallDirectoryName) {
         $IniContent += ("InstallDirectoryName=" + $InstallDirectoryName)
     }
-    if($InstallDirectoryPath){
+    if ($InstallDirectoryPath) {
         $IniContent += ("InstallDirectoryPath=" + $InstallDirectoryPath)
     }
 
