@@ -1,4 +1,4 @@
-﻿Configuration cFirefox
+Configuration cFirefox
 {
     param
     (
@@ -61,6 +61,7 @@
             }
             $using:IniContent -join "`r`n" | Out-File -FilePath $using:IniPath -Encoding ascii -Force
         }
+        NoRestart = $true
     }
 
 }
