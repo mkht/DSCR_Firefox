@@ -90,7 +90,7 @@ Configuration Example1
 
 + **Example 2**: Install Firefox 60.0 ESR without MozillaMaintenance service
 ```Powershell
-Configuration Example1
+Configuration Example2
 {
     Import-DscResource -ModuleName DSCR_Firefox
     cFirefox Firefox60ESR
