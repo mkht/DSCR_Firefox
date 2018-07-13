@@ -1,5 +1,5 @@
 @{
-    RootModule        = 'cFirefoxPolicies.schema.psm1'
+    RootModule        = 'cFirefoxPolicy.schema.psm1'
     ModuleVersion     = '1.0.0'
     GUID              = '0f163f21-cc50-46f9-a86f-68e011af1486'
     Author            = 'mkht'
