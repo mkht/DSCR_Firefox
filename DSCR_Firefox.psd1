@@ -1,4 +1,4 @@
-﻿#
+#
 # モジュール 'DSCR_Firefox' のモジュール マニフェスト
 #
 # 生成者: mkht
@@ -51,7 +51,7 @@
     # ProcessorArchitecture = ''
 
     # このモジュールをインポートする前にグローバル環境にインポートされている必要があるモジュール
-    RequiredModules      = @( 'DSCR_Application', 'DSCR_IniFile' )
+    RequiredModules      = @( 'DSCR_Application', 'DSCR_IniFile', 'DSCR_JsonFile' )
 
     # このモジュールをインポートする前に読み込まれている必要があるアセンブリ
     # RequiredAssemblies = @()
@@ -81,7 +81,7 @@
     AliasesToExport      = @()
 
     # このモジュールからエクスポートする DSC リソース
-    DscResourcesToExport = @('cFirefox', 'cFirefoxBookmarks', 'cFirefoxPrefs')
+    DscResourcesToExport = @('cFirefox', 'cFirefoxBookmarks', 'cFirefoxPrefs', 'cFirefoxPolicy', 'cFirefoxBookmarksPolicy')
 
     # このモジュールに同梱されているすべてのモジュールのリスト
     # ModuleList = @()
