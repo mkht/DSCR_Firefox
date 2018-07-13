@@ -30,6 +30,11 @@ Install Firefox
     + Specify the machine's operating system bit number.
     + The default is `x86`. (`x86` or `x64`)
 
++ [string] **InstallerPath** (Optional):
+    + The path of the the Firefox installer file.
+    + If this value is not specified, The Installer will be downloaded from Mozilla. (https://ftp.mozilla.org/pub/firefox/releases/)
+    + Please use if you want to use self-customized installer or if the target machine is not connected to the Internet.
+
 + [string] **InstallDirectoryName** (Optional):
     + The name of the directory where the Firefox will be installed.
     + If this value is specified then `InstallDirectoryPath` will be ignored.
@@ -54,6 +59,20 @@ Install Firefox
     + Specify whether the MozillaMaintenance service will be installed or not
     + The default is `$true`
 
++ [bool] **StartMenuShortcuts** (Optional):
+    + Create shortcuts for the application in the Start Menu.
+    + The default is `$true`
+
++ [string] **StartMenuDirectoryName** (Optional):
+    + The directory name to use for the StartMenu folder
+    + The default is `Mozilla Firefox`
+
++ [bool] **OptionalExtensions** (Optional):
+    + Set this option to `$false` to opt-out installation of any optional extensions.
+    + The default is `$true`
+    + This option can be used in Firefox 60 or later.
+
+
 ### Examples
 + **Example 1**: Install Firefox 53.0.3 x64 japanese
 ```Powershell
@@ -65,6 +84,19 @@ Configuration Example1
         VersionNumber = "53.0.3"
         Language = "ja"
         Machinebits = "x64"
+    }
+}
+```
+
++ **Example 2**: Install Firefox 60.0 ESR without MozillaMaintenance service
+```Powershell
+Configuration Example2
+{
+    Import-DscResource -ModuleName DSCR_Firefox
+    cFirefox Firefox60ESR
+    {
+        VersionNumber = "60.0esr"
+        MaintenanceService = $false
     }
 }
 ```
@@ -168,6 +200,13 @@ Configuration Example1
 
 ----
 ## ChangeLog
+### 0.8.0
+ + [cFirefox] Now you can specify the ESR version of Firefox. e.g) `VersionNumber = "60.0esr"`
+ + [cFirefox] Add the `OptionalExtensions` param to opt-out installation of any optional extensions. (This option can be used in Firefox 60 or later)
+ + [cFirefox] Add `StartMenuShortcuts` and `StartMenuDirectoryName` params.
+ + [cFirefox] Add the `InstallerPath` param for offline installation.
+ + [cFirefox] Change the download source URL of the installer to `https://ftp.mozilla.org/`
+
 ### 0.7.1
  + Fix issue [#7](https://github.com/mkht/DSCR_Firefox/issues/7) `cFirefoxPrefs` was not loaded some systems.
 

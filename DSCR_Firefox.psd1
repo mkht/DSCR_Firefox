@@ -12,25 +12,25 @@
     # RootModule = ''
 
     # このモジュールのバージョン番号です。
-    ModuleVersion     = '0.7.1'
+    ModuleVersion        = '0.8.0'
 
     # サポートされている PSEditions
     # CompatiblePSEditions = @()
 
     # このモジュールを一意に識別するために使用される ID
-    GUID              = '3e3ba330-6cde-4ff2-9324-1f3e4ee4fdd2'
+    GUID                 = '3e3ba330-6cde-4ff2-9324-1f3e4ee4fdd2'
 
     # このモジュールの作成者
-    Author            = 'mkht'
+    Author               = 'mkht'
 
     # このモジュールの会社またはベンダー
     # CompanyName = 'Unknown'
 
     # このモジュールの著作権情報
-    Copyright         = '(c) 2017 mkht. All rights reserved.'
+    Copyright            = '(c) 2018 mkht. All rights reserved.'
 
     # このモジュールの機能の説明
-    Description       = 'DSC Resource to manage Firefox'
+    Description          = 'DSC Resource to manage Firefox'
 
     # このモジュールに必要な Windows PowerShell エンジンの最小バージョン
     # PowerShellVersion = ''
@@ -69,16 +69,16 @@
     # NestedModules = @()
 
     # このモジュールからエクスポートする関数です。最適なパフォーマンスを得るには、ワイルドカードを使用せず、エクスポートする関数がない場合は、エントリを削除しないで空の配列を使用してください。
-    FunctionsToExport = @()
+    FunctionsToExport    = @()
 
     # このモジュールからエクスポートするコマンドレットです。最適なパフォーマンスを得るには、ワイルドカードを使用せず、エクスポートするコマンドレットがない場合は、エントリを削除しないで空の配列を使用してください。
-    CmdletsToExport   = @()
+    CmdletsToExport      = @()
 
     # このモジュールからエクスポートする変数
-    VariablesToExport = '*'
+    VariablesToExport    = '*'
 
     # このモジュールからエクスポートするエイリアスです。最適なパフォーマンスを得るには、ワイルドカードを使用せず、エクスポートするエイリアスがない場合は、エントリを削除しないで空の配列を使用してください。
-    AliasesToExport   = @()
+    AliasesToExport      = @()
 
     # このモジュールからエクスポートする DSC リソース
     DscResourcesToExport = @('cFirefox', 'cFirefoxBookmarks', 'cFirefoxPrefs', 'cFirefoxPolicy', 'cFirefoxBookmarksPolicy')
@@ -90,7 +90,7 @@
     # FileList = @()
 
     # RootModule/ModuleToProcess に指定されているモジュールに渡すプライベート データ。これには、PowerShell で使用される追加のモジュール メタデータを含む PSData ハッシュテーブルが含まれる場合もあります。
-    PrivateData       = @{
+    PrivateData          = @{
 
         PSData = @{
 
