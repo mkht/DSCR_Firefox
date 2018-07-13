@@ -19,9 +19,9 @@ Install-Module -Name DSCR_Firefox
 ## Resources
 |||
 |:---:|:---:|
-|[cFirefox](#cFirefox)||
-|[cFirefoxBookmarks](#cFirefoxBookmarks)|[cFirefoxPrefs](#cFirefoxPrefs)|
-|[cFirefoxPolicy](#cFirefoxPolicy)|[cFirefoxBookmarksPolicy](#cFirefoxBookmarksPolicy)|
+|[cFirefox](#cfirefox)||
+|[cFirefoxBookmarks](#cfirefoxbookmarks)|[cFirefoxPrefs](#cfirefoxprefs)|
+|[cFirefoxPolicy](#cfirefoxpolicy)|[cFirefoxBookmarksPolicy](#cfirefoxbookmarkspolicy)|
 
 ----
 ## **cFirefox**
@@ -310,7 +310,7 @@ Configuration Example1
 
 ----
 ## ChangeLog
-### Unreleased
+### 0.9.0
 + Add new resource `cFirefoxPolicy`
 + Add new resource `cFirefoxBookmarksPolicy`
 

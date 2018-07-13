@@ -1,4 +1,4 @@
-#
+﻿#
 # モジュール 'DSCR_Firefox' のモジュール マニフェスト
 #
 # 生成者: mkht
@@ -12,7 +12,7 @@
     # RootModule = ''
 
     # このモジュールのバージョン番号です。
-    ModuleVersion        = '0.8.0'
+    ModuleVersion        = '0.9.0'
 
     # サポートされている PSEditions
     # CompatiblePSEditions = @()
@@ -30,7 +30,7 @@
     Copyright            = '(c) 2018 mkht. All rights reserved.'
 
     # このモジュールの機能の説明
-    Description          = 'DSC Resource to manage Firefox'
+    Description          = 'DSC Resource for managing Firefox'
 
     # このモジュールに必要な Windows PowerShell エンジンの最小バージョン
     # PowerShellVersion = ''
