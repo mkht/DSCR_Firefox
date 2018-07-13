@@ -209,7 +209,7 @@ Configuration Example1
 
 ----
 ## **cFirefoxPolicy**
-The DSC Resource for configuring [Firefox Enterprise Policies](https://wiki.mozilla.org/Firefox/EnterprisePolicies)
+The DSC Resource for configuring [Firefox Enterprise Policies](https://wiki.mozilla.org/Firefox/EnterprisePolicies)  
 This resource can be used only in Firefox 60 or later
 
 ### Properties
@@ -265,7 +265,7 @@ Configuration Example2
 ----
 ## **cFirefoxBookmarksPolicy**
 The DSC Resource for configuring Bookmarks
-The difference with *cFirefoxBookmarks* is set as policy, so you can enforce settings to the end-users
+The difference with *cFirefoxBookmarks* is set as policy, so you can enforce settings to the end-users  
 This resource can be used only in Firefox 60 or later
 
 ### Properties
