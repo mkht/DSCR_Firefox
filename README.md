@@ -1,7 +1,8 @@
 DSCR_Firefox
 ====
 
-DSC Resource to manage Firefox
+DSC Resource for managing Firefox
+
 ----
 ## Installation
 You can install from [PowerShell Gallery](https://www.powershellgallery.com/packages/DSCR_Firefox/).
@@ -12,15 +13,23 @@ Install-Module -Name DSCR_Firefox
 ## Dependencies
 * [DSCR_Application](https://github.com/mkht/DSCR_Application)
 * [DSCR_IniFile](https://github.com/mkht/DSCR_IniFile)
+* [DSCR_JsonFile](https://github.com/mkht/DSCR_JsonFile)
 
 ----
 ## Resources
+|||
+|:---:|:---:|
+|[cFirefox](#cFirefox)||
+|[cFirefoxBookmarks](#cFirefoxBookmarks)|[cFirefoxPrefs](#cFirefoxPrefs)|
+|[cFirefoxPolicy](#cFirefoxPolicy)|[cFirefoxBookmarksPolicy](#cFirefoxBookmarksPolicy)|
+
+----
 ## **cFirefox**
 Install Firefox
 
 ### Properties
 + [string] **VersionNumber** (Require):
-    + Version of the Firefox you wish install.
+    + The version of the Firefox you wish install. e.g) `61.0`
 
 + [string] **Language** (Optional):
     + Language of the Firefox.
@@ -199,7 +208,112 @@ Configuration Example1
 ```
 
 ----
+## **cFirefoxPolicy**
+The DSC Resource for configuring [Firefox Enterprise Policies](https://wiki.mozilla.org/Firefox/EnterprisePolicies)
+This resource can be used only in Firefox 60 or later
+
+### Properties
++ [string] **Ensure** (Optional):
+    + Whether to set or delete policies
+    + The default is `Present`  [`Present` | `Absent`]
+
++ [string] **PolicyName** (Require):
+    + The NAME of the policy
+    + Please refer to [the document](https://wiki.mozilla.org/Firefox/EnterprisePolicies) for possible values
+
++ [string] **PolicyValue** (Require):
+    + The value of the policies
+    + The value of this parameter must be a JSON formatted string
+
++ [string] **FirefoxDirectory** (Optional):
+    + Specify the directory of the Firefox installed.
+    + The default is `"C:\Program Files\Mozilla Firefox"`
+
+### Examples
+**Example 1**: To configure the policy that removes access to about:addons
+```Powershell
+Configuration Example1
+{
+    Import-DscResource -ModuleName DSCR_Firefox
+    cFireFoxPolicy FireFox_UBlockAboutAddons
+    {
+        PolicyName = 'BlockAboutAddons'
+        PolicyValue = $true
+    }
+}
+```
+
+**Example 2**: To configure the policy that sets the default homepage
+```Powershell
+Configuration Example2
+{
+    Import-DscResource -ModuleName DSCR_Firefox
+    cFireFoxPolicy FireFox_UBlockAboutAddons
+    {
+        PolicyName = 'Homepage'
+        PolicyValue = @'
+        {
+            "URL": "http://example.com/",
+            "Locked": true,
+            "Additional": ["http://example.org/", "http://example.edu/"]
+        }
+'@
+    }
+}
+```
+
+----
+## **cFirefoxBookmarksPolicy**
+The DSC Resource for configuring Bookmarks
+The difference with *cFirefoxBookmarks* is set as policy, so you can enforce settings to the end-users
+This resource can be used only in Firefox 60 or later
+
+### Properties
++ [string] **Ensure** (Optional):
+    + Whether to create or delete bookmarks
+    + The default is `Present`  [`Present` | `Absent`]
+
++ [string] **Title** (Require):
+    + The name of the bookmark
+
++ [string] **URL** (Require):
+    + The URL of the bookmark.
+
++ [string] **Favicon** (Optional):
+    + The URL of the bookmark's icon.
+
++ [string] **Placement** (Optional):
+    + Whether to place bookmarks in menu or toolbar.
+    + The default is `toolbar`  [`toolbar` | `menu`]
+
++ [string] **Folder** (Optional):
+    + If a Folder is specified, it is automatically created and bookmarks with the same folder name are grouped together.
+
++ [string] **FirefoxDirectory** (Optional):
+    + Specify the directory of the Firefox installed.
+    + The default is `"C:\Program Files\Mozilla Firefox"`
+
+### Examples
+**Example 1**: Create bookmark
+```Powershell
+Configuration Example1
+{
+    Import-DscResource -ModuleName DSCR_Firefox
+    cFireFoxBookmarksPolicy FireFox_BookmarksPolicy
+    {
+        Title   = 'Example1'
+        URL     = 'https://www.example.com/'
+        Favicon = 'https://www.example.com/favicon.ico'
+    }
+}
+```
+
+----
 ## ChangeLog
+### Unreleased
++ Add new resource `cFirefoxPolicy`
++ Add new resource `cFirefoxBookmarksPolicy`
+
 ### 0.8.0
  + [cFirefox] Now you can specify the ESR version of Firefox. e.g) `VersionNumber = "60.0esr"`
  + [cFirefox] Add the `OptionalExtensions` param to opt-out installation of any optional extensions. (This option can be used in Firefox 60 or later)
