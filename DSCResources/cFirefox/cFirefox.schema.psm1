@@ -58,7 +58,11 @@
 
         [Parameter()]
         [bool]
-        $OptionalExtensions = $true #only Firefox 60+
+        $OptionalExtensions = $true, #only Firefox 60+
+
+        [Parameter()]
+        [PSCredential]
+        $Credential
     )
 
     Import-DscResource -ModuleName DSCR_Application
@@ -102,19 +106,37 @@
         $AppName = ("Mozilla Firefox {0} ({1} {2})" -f $VersionNumber, $MachineBits, $Language)
     }
 
-
-    cApplication Install
-    {
-        Name          = $AppName
-        InstallerPath = $InstallerPath
-        Arguments     = "-ms /INI=$IniPath"
-        PreAction     = {
-            $parent = (split-path -Path $using:IniPath -Parent)
-            if (-not (Test-Path -Path $parent)) {
-                New-Item -Path $parent -ItemType Directory -Force | Out-Null
+    if ($Credential) {
+        cApplication Install
+        {
+            Name          = $AppName
+            InstallerPath = $InstallerPath
+            Arguments     = "-ms /INI=$IniPath"
+            PreAction     = {
+                $parent = (split-path -Path $using:IniPath -Parent)
+                if (-not (Test-Path -Path $parent)) {
+                    New-Item -Path $parent -ItemType Directory -Force | Out-Null
+                }
+                $using:IniContent -join "`r`n" | Out-File -FilePath $using:IniPath -Encoding ascii -Force
             }
-            $using:IniContent -join "`r`n" | Out-File -FilePath $using:IniPath -Encoding ascii -Force
+            NoRestart     = $true
+            Credential    = $Credential
         }
-        NoRestart     = $true
+    }
+    else {
+        cApplication Install
+        {
+            Name          = $AppName
+            InstallerPath = $InstallerPath
+            Arguments     = "-ms /INI=$IniPath"
+            PreAction     = {
+                $parent = (split-path -Path $using:IniPath -Parent)
+                if (-not (Test-Path -Path $parent)) {
+                    New-Item -Path $parent -ItemType Directory -Force | Out-Null
+                }
+                $using:IniContent -join "`r`n" | Out-File -FilePath $using:IniPath -Encoding ascii -Force
+            }
+            NoRestart     = $true
+        }
     }
 }

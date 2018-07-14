@@ -81,6 +81,10 @@ Install Firefox
     + The default is `$true`
     + This option can be used in Firefox 60 or later.
 
++ [PSCredential] **Credential** (Optional):
+    + The credential for access to the installer on a remote source if needed.
+    + :warning: If you want to run the installation as specific user, you need to use `RunAsCredential` standard property.
+
 
 ### Examples
 + **Example 1**: Install Firefox 53.0.3 x64 japanese
@@ -310,6 +314,9 @@ Configuration Example1
 
 ----
 ## ChangeLog
+### Unreleased
+ + [cFirefox] Add the `Credential` property
+
 ### 0.9.0
 + Add new resource `cFirefoxPolicy`
 + Add new resource `cFirefoxBookmarksPolicy`
