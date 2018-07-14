@@ -83,7 +83,7 @@ Install Firefox
 
 + [PSCredential] **Credential** (Optional):
     + The credential for access to the installer on a remote source if needed.
-    + :warning: If you want to run the installation as specific user, you need to use `RunAsCredential` standard property.
+    + :warning: If you want to run the installation as specific user, you need to use `PsDscRunAsCredential` standard property.
 
 
 ### Examples
