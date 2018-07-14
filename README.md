@@ -219,7 +219,7 @@ This resource can be used only in Firefox 60 or later
 
 + [string] **PolicyName** (Require):
     + The NAME of the policy
-    + Please refer to [the document](https://wiki.mozilla.org/Firefox/EnterprisePolicies) for possible values
+    + Please refer to [the document](https://github.com/mozilla/policy-templates/blob/master/README.md) for possible values
 
 + [string] **PolicyValue** (Require):
     + The value of the policies
@@ -235,7 +235,7 @@ This resource can be used only in Firefox 60 or later
 Configuration Example1
 {
     Import-DscResource -ModuleName DSCR_Firefox
-    cFireFoxPolicy FireFox_UBlockAboutAddons
+    cFireFoxPolicy FireFox_BlockAboutAddons
     {
         PolicyName = 'BlockAboutAddons'
         PolicyValue = $true
@@ -248,7 +248,7 @@ Configuration Example1
 Configuration Example2
 {
     Import-DscResource -ModuleName DSCR_Firefox
-    cFireFoxPolicy FireFox_UBlockAboutAddons
+    cFireFoxPolicy FireFox_Homepage
     {
         PolicyName = 'Homepage'
         PolicyValue = @'
@@ -264,7 +264,7 @@ Configuration Example2
 
 ----
 ## **cFirefoxBookmarksPolicy**
-The DSC Resource for configuring Bookmarks
+The DSC Resource for configuring Bookmarks  
 The difference with *cFirefoxBookmarks* is set as policy, so you can enforce settings to the end-users  
 This resource can be used only in Firefox 60 or later
 
