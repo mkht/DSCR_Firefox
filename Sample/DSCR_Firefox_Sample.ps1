@@ -3,30 +3,43 @@ Import-Module DSCR_Firefox -force
 
 Configuration DSCR_Firefox_Sample
 {
-
     Import-DscResource -ModuleName DSCR_Firefox
 
-    cFireFox FireFox_Install
+    cFirefox Firefox_Install
     {
-        VersionNumber        = '54.0.1'
+        VersionNumber        = '61.0.1'
         Language             = 'ja'
         MachineBits          = 'x86'
-        InstallDirectoryPath = 'C:\FireFox'
+        InstallDirectoryPath = 'C:\Firefox'
     }
 
-    cFireFoxBookmarks FireFox_Bookmark_Google
+    cFirefoxBookmarks Firefox_Bookmark_Google
     {
         Title            = 'Google'
         Link             = 'https://www.google.com/'
-        FirefoxDirectory = 'C:\FireFox'
+        FirefoxDirectory = 'C:\Firefox'
     }
 
-    cFireFoxPrefs FireFox_Update_Disable
+    cFirefoxPrefs Firefox_QuitWarning_Enable
     {
-        PrefName         = 'app.update.enabled'
+        PrefName         = 'browser.showQuitWarning'
         PrefValue        = $false
-        PrefType         = 'lockPref'
-        FirefoxDirectory = 'C:\FireFox'
+        PrefType         = 'pref'
+        FirefoxDirectory = 'C:\Firefox'
+    }
+
+    cFirefoxPolicy Firefox_BlockAboutConfig_Policy
+    {
+        PolicyName       = 'BlockAboutConfig'
+        PolicyValue      = 'true'
+        FirefoxDirectory = 'C:\Firefox'
+    }
+
+    cFirefoxBookmarksPolicy Firefox_BookmarksPolicy_GitHub
+    {
+        Title            = 'GitHub'
+        URL              = 'https://github.com/'
+        FirefoxDirectory = 'C:\Firefox'
     }
 
 }
