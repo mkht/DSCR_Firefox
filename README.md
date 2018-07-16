@@ -314,7 +314,7 @@ Configuration Example1
 
 ----
 ## ChangeLog
-### Unreleased
+### 1.0.0
  + [cFirefox] Add the `Credential` property
 
 ### 0.9.0
