@@ -12,12 +12,15 @@
         [AllowEmptyString()]
         [string] $PrefValue,
 
+        [Parameter()]
         [ValidateSet('pref', 'defaultPref', 'lockPref', 'clearPref', 'LocalizablePreferences')]
         [string] $PrefType = 'pref',
 
+        [Parameter()]
         [ValidatePattern('.+\.cfg$')]
         [string] $CfgFileName = "autoconfig.cfg",
 
+        [Parameter()]
         [ValidateNotNullOrEmpty()]
         [string] $FirefoxDirectory = "C:\Program Files\Mozilla Firefox"
     )
@@ -48,7 +51,7 @@
         about   = 'DSC-Customized'
     }
 
-    Script Check_FireFoxDirectory
+    Script Test_FireFoxDirectory
     {
         GetScript = {
         }
