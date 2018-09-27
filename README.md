@@ -314,6 +314,9 @@ Configuration Example1
 
 ----
 ## ChangeLog
+### 1.0.1
+ + Remove unnecessary files in the published package
+
 ### 1.0.0
  + [cFirefox] Add the `Credential` property
 
