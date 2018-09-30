@@ -40,7 +40,7 @@ Install Firefox
     + The default is `x86`. (`x86` or `x64`)
 
 + [string] **InstallerPath** (Optional):
-    + The path of the the Firefox installer file.
+    + The path of the Firefox installer file.
     + If this value is not specified, The Installer will be downloaded from Mozilla. (https://ftp.mozilla.org/pub/firefox/releases/)
     + Please use if you want to use self-customized installer or if the target machine is not connected to the Internet.
 
