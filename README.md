@@ -91,7 +91,7 @@ Install Firefox
 Configuration Example1
 {
     Import-DscResource -ModuleName DSCR_Firefox
-    cFirefox Firefox53
+    cFirefox Firefox63
     {
         VersionNumber = "63.0"
         Language = "ja"
