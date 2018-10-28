@@ -86,14 +86,14 @@ Install Firefox
 
 
 ### Examples
-+ **Example 1**: Install Firefox 53.0.3 x64 japanese
++ **Example 1**: Install Firefox 63.0 x64 japanese
 ```Powershell
 Configuration Example1
 {
     Import-DscResource -ModuleName DSCR_Firefox
     cFirefox Firefox53
     {
-        VersionNumber = "53.0.3"
+        VersionNumber = "63.0"
         Language = "ja"
         Machinebits = "x64"
     }
@@ -313,6 +313,10 @@ Configuration Example1
 
 ----
 ## ChangeLog
+### 1.1.0
+ + Add the dependent modules to [DSCR_FileContent](https://github.com/mkht/DSCR_FileContent).
+ + Remove the dependent modules [DSCR_IniFile](https://github.com/mkht/DSCR_IniFile) and [DSCR_JsonFile](https://github.com/mkht/DSCR_JsonFile).
+
 ### 1.0.1
  + Remove unnecessary files in the published package
 
