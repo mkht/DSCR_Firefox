@@ -7,22 +7,23 @@ Configuration DSCR_Firefox_Sample
 
     cFirefox Firefox_Install
     {
-        VersionNumber        = '61.0.1'
+        VersionNumber        = '63.0'
         Language             = 'ja'
-        MachineBits          = 'x86'
+        MachineBits          = 'x64'
         InstallDirectoryPath = 'C:\Firefox'
     }
 
     cFirefoxBookmarks Firefox_Bookmark_Google
     {
-        Title            = 'Google'
-        Link             = 'https://www.google.com/'
-        FirefoxDirectory = 'C:\Firefox'
+        Title             = 'Google'
+        Link              = 'https://www.google.com/'
+        BookmarksLocation = 'BookmarksToolbar'
+        FirefoxDirectory  = 'C:\Firefox'
     }
 
     cFirefoxPrefs Firefox_QuitWarning_Enable
     {
-        PrefName         = 'browser.showQuitWarning'
+        PrefName         = 'browser.tabs.warnOnClose'
         PrefValue        = $false
         PrefType         = 'pref'
         FirefoxDirectory = 'C:\Firefox'
