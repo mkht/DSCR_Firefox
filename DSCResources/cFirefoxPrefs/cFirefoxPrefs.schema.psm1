@@ -26,7 +26,7 @@
     )
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName DSCR_IniFile
+    Import-DscResource -ModuleName DSCR_FileContent
 
     $MozIniPath = Join-Path $FirefoxDirectory "\distribution\distribution.ini"
     $MozPrefJsPath = Join-Path $FirefoxDirectory "\defaults\pref\autoconfig.js"
@@ -66,7 +66,7 @@
     }
 
     if (($PrefType -eq 'pref') -or ($PrefType -eq 'LocalizablePreferences')) {
-        cIniFile Global_Id
+        IniFile Global_Id
         {
             Ensure   = 'Present'
             Path     = $MozIniPath
@@ -75,7 +75,7 @@
             Section  = 'Global'
             Encoding = 'UTF8'
         }
-        cIniFile Global_version
+        IniFile Global_version
         {
             Ensure   = 'Present'
             Path     = $MozIniPath
@@ -84,7 +84,7 @@
             Section  = 'Global'
             Encoding = 'UTF8'
         }
-        cIniFile Global_about
+        IniFile Global_about
         {
             Ensure   = 'Present'
             Path     = $MozIniPath
@@ -96,7 +96,7 @@
     }
 
     if ($PrefType -eq 'pref') {
-        cIniFile Prefs
+        IniFile Prefs
         {
             Ensure   = 'Present'
             Path     = $MozIniPath
@@ -107,7 +107,7 @@
         }
     }
     elseif ($PrefType -eq 'LocalizablePreferences') {
-        cIniFile LocalizedPrefs
+        IniFile LocalizedPrefs
         {
             Ensure   = 'Present'
             Path     = $MozIniPath

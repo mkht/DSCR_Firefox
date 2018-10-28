@@ -12,8 +12,7 @@ Install-Module -Name DSCR_Firefox
 
 ## Dependencies
 * [DSCR_Application](https://github.com/mkht/DSCR_Application)
-* [DSCR_IniFile](https://github.com/mkht/DSCR_IniFile)
-* [DSCR_JsonFile](https://github.com/mkht/DSCR_JsonFile)
+* [DSCR_FileContent](https://github.com/mkht/DSCR_FileContent)
 
 ----
 ## Resources

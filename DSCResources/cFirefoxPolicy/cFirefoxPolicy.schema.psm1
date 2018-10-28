@@ -22,7 +22,7 @@ Configuration cFirefoxPolicy
     )
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName DSCR_JsonFile
+    Import-DscResource -ModuleName DSCR_FileContent
 
     $MozPolicyPath = Join-Path $FirefoxDirectory "\distribution\policies.json"
 
@@ -62,7 +62,7 @@ Configuration cFirefoxPolicy
         }
     }
 
-    cJsonFile FirefoxPolicy
+    JsonFile FirefoxPolicy
     {
         Ensure  = $Ensure
         Path    = $MozPolicyPath

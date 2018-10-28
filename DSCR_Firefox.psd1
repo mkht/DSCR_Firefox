@@ -51,7 +51,7 @@
     # ProcessorArchitecture = ''
 
     # このモジュールをインポートする前にグローバル環境にインポートされている必要があるモジュール
-    RequiredModules      = @( 'DSCR_Application', 'DSCR_IniFile', 'DSCR_JsonFile' )
+    RequiredModules      = @( 'DSCR_Application', 'DSCR_FileContent')
 
     # このモジュールをインポートする前に読み込まれている必要があるアセンブリ
     # RequiredAssemblies = @()

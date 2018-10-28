@@ -39,7 +39,7 @@
     )
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName DSCR_IniFile
+    Import-DscResource -ModuleName DSCR_FileContent
 
     $MozIniPath = Join-Path $FirefoxDirectory "\distribution\distribution.ini"
 
@@ -62,7 +62,7 @@
         }
     }
 
-    cIniFile Global_Id
+    IniFile Global_Id
     {
         Ensure   = 'Present'
         Path     = $MozIniPath
@@ -71,7 +71,7 @@
         Section  = 'Global'
         Encoding = 'UTF8'
     }
-    cIniFile Global_version
+    IniFile Global_version
     {
         Ensure   = 'Present'
         Path     = $MozIniPath
@@ -80,7 +80,7 @@
         Section  = 'Global'
         Encoding = 'UTF8'
     }
-    cIniFile Global_about
+    IniFile Global_about
     {
         Ensure   = 'Present'
         Path     = $MozIniPath
@@ -89,7 +89,7 @@
         Section  = 'Global'
         Encoding = 'UTF8'
     }
-    cIniFile Global_bookmarks
+    IniFile Global_bookmarks
     {
         Ensure   = 'Present'
         Path     = $MozIniPath
@@ -100,7 +100,7 @@
     }
 
     if ($Type -eq 'link') {
-        cIniFile Bookmarks_Title
+        IniFile Bookmarks_Title
         {
             Ensure   = 'Present'
             Path     = $MozIniPath
@@ -109,7 +109,7 @@
             Section  = $BookmarksLocation
             Encoding = 'UTF8'
         }
-        cIniFile Bookmarks_Link
+        IniFile Bookmarks_Link
         {
             Ensure   = 'Present'
             Path     = $MozIniPath
@@ -119,7 +119,7 @@
             Encoding = 'UTF8'
         }
         if ($IconUrl) {
-            cIniFile Bookmarks_Icon
+            IniFile Bookmarks_Icon
             {
                 Ensure   = 'Present'
                 Path     = $MozIniPath
@@ -130,7 +130,7 @@
             }
         }
         if ($IconData) {
-            cIniFile Bookmarks_IconData
+            IniFile Bookmarks_IconData
             {
                 Ensure   = 'Present'
                 Path     = $MozIniPath
@@ -143,7 +143,7 @@
     }
 
     if ($Type -eq 'separator') {
-        cIniFile Bookmarks_Separator
+        IniFile Bookmarks_Separator
         {
             Ensure   = 'Present'
             Path     = $MozIniPath
@@ -155,7 +155,7 @@
     }
 
     if ($Type -eq 'folder') {
-        cIniFile Bookmarks_Folder
+        IniFile Bookmarks_Folder
         {
             Ensure   = 'Present'
             Path     = $MozIniPath
@@ -164,7 +164,7 @@
             Section  = $BookmarksLocation
             Encoding = 'UTF8'
         }
-        cIniFile Bookmarks_Title
+        IniFile Bookmarks_Title
         {
             Ensure   = 'Present'
             Path     = $MozIniPath
@@ -173,7 +173,7 @@
             Section  = $BookmarksLocation
             Encoding = 'UTF8'
         }
-        cIniFile Bookmarks_FolderId
+        IniFile Bookmarks_FolderId
         {
             Ensure   = 'Present'
             Path     = $MozIniPath

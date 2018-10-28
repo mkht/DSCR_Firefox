@@ -32,7 +32,7 @@ Configuration cFirefoxBookmarksPolicy
     )
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
-    Import-DscResource -ModuleName DSCR_JsonFile
+    Import-DscResource -ModuleName DSCR_FileContent
 
     $MozPolicyPath = Join-Path $FirefoxDirectory "\distribution\policies.json"
 
@@ -68,7 +68,7 @@ Configuration cFirefoxBookmarksPolicy
         }
     }
 
-    cJsonFile BookmarksPolicy {
+    JsonFile BookmarksPolicy {
         Ensure = $Ensure
         Path   = $MozPolicyPath
         Key    = "policies/Bookmarks"
