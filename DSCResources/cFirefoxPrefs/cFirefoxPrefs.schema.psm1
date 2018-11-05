@@ -37,6 +37,16 @@ Configuration cFirefoxPrefs
     $MozPrefJsPath = Join-Path $FirefoxDirectory '\defaults\pref\autoconfig.js'
     $MozPrefCfgPath = Join-Path $FirefoxDirectory $CfgFileName
 
+    #PrefType is case sensitive.
+    $PrefType = switch ($PrefType)
+    {
+        'pref' { 'pref'; break }
+        'defaultPref' { 'defaultPref'; break }
+        'lockPref' { 'lockPref'; break }
+        'clearPref' { 'clearPref'; break }
+        'LocalizablePreferences' { 'LocalizablePreferences'; break }
+    }
+
     $FormattedPrefValue = & {
         if ([float]::TryParse($PrefValue, [ref]$null)) {$PrefValue}
         elseif ([bool]::TryParse($PrefValue, [ref]$null)) {$PrefValue.toLower()}

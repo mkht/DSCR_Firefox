@@ -181,7 +181,7 @@ Configuration Example1
 
 + [string] **PrefType** (Optional):
     + The type of the preference.
-    + `pref` / `defaultPref` / `lockPref` / `cleanPref` / `LocalizablePreferences`
+    + `pref` / `defaultPref` / `lockPref` / `cleanPref` / `LocalizablePreferences` (Case sensitive!)
     + The default is `pref`
 
 |Type|detail|
@@ -313,8 +313,9 @@ Configuration Example1
 
 ----
 ## ChangeLog
-### 1.1.1
- + Fixed issue that the cFirefoxPrefs is not working correctly when the `PrefType` is `defaultPref` or `cleanPref` or `lockPref`.
+### Unreleased
+ + [cFirefoxPrefs] Improved to work properly even if the case of `PrefType` value is incorrect.
+ + [cFirefoxPrefs] Fixed issue that the cFirefoxPrefs is not working correctly when the `PrefType` is `defaultPref` or `cleanPref` or `lockPref`.
 
 ### 1.1.0
  + Add the dependent modules to [DSCR_FileContent](https://github.com/mkht/DSCR_FileContent).
