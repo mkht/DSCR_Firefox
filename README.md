@@ -313,7 +313,7 @@ Configuration Example1
 
 ----
 ## ChangeLog
-### Unreleased
+### 1.1.2
  + [cFirefoxPrefs] Improved to work properly even if the case of `PrefType` value is incorrect.
  + [cFirefoxPrefs] Fixed issue that the cFirefoxPrefs is not working correctly when the `PrefType` is `defaultPref` or `cleanPref` or `lockPref`.
 
