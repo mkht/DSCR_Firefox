@@ -130,14 +130,17 @@ Configuration cFirefoxPrefs
     }
     else
     {
-        File autoconfig_js
+        TextFile autoconfig_js
         {
-            DestinationPath = $MozPrefJsPath
-            Contents        = @"
-pref("general.config.filename", "$CfgFileName");
+            Path     = $MozPrefJsPath
+            Contents = @"
+//The first line must be a comment
 pref("general.config.vendor", "autoconfig");
 pref("general.config.obscure_value", 0);
+pref("general.config.filename", "$CfgFileName");
+
 "@
+            Encoding = 'UTF8'
         }
 
         Script autoconfig_cfg

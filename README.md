@@ -41,7 +41,7 @@ Install Firefox
 + [string] **InstallerPath** (Optional):
     + The path of the Firefox installer file.
     + If this value is not specified, The Installer will be downloaded from Mozilla. (https://ftp.mozilla.org/pub/firefox/releases/)
-    + Please use if you want to use self-customized installer or if the target machine is not connected to the Internet.
+    + Please use if you want to use the self-customized installer or if the target machine is not connected to the Internet.
 
 + [string] **InstallDirectoryName** (Optional):
     + The name of the directory where the Firefox will be installed.
@@ -82,7 +82,7 @@ Install Firefox
 
 + [PSCredential] **Credential** (Optional):
     + The credential for access to the installer on a remote source if needed.
-    + :warning: If you want to run the installation as specific user, you need to use `PsDscRunAsCredential` standard property.
+    + :warning: If you want to run the installation as a specific user, you need to use `PsDscRunAsCredential` standard property.
 
 
 ### Examples
@@ -186,7 +186,7 @@ Configuration Example1
 
 |Type|detail|
 |:------:|:------|
-|pref|The user can temporarily change the setting, but the changed value will be lost when exit Firefox|
+|pref|The user can temporarily change the setting, but the changed value will be lost when exiting Firefox|
 |defaultPref|The user can change the setting, and the changed value will be saved even after Firefox exits.|
 |lockPref|The user can not change the setting.|
 |cleanPref|Delete setting value|
@@ -297,7 +297,7 @@ This resource can be used only in Firefox 60 or later
     + The default is `"C:\Program Files\Mozilla Firefox"`
 
 ### Examples
-**Example 1**: Create bookmark
+**Example 1**: Create a bookmark
 ```Powershell
 Configuration Example1
 {
@@ -313,6 +313,9 @@ Configuration Example1
 
 ----
 ## ChangeLog
+### 1.1.1
+ + Fixed issue that the cFirefoxPrefs is not working correctly when the `PrefType` is `defaultPref` or `cleanPref` or `lockPref`.
+
 ### 1.1.0
  + Add the dependent modules to [DSCR_FileContent](https://github.com/mkht/DSCR_FileContent).
  + Remove the dependent modules [DSCR_IniFile](https://github.com/mkht/DSCR_IniFile) and [DSCR_JsonFile](https://github.com/mkht/DSCR_JsonFile).
