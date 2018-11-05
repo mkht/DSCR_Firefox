@@ -6,43 +6,52 @@ Configuration cFirefoxPolicy
     (
         [Parameter(Mandatory = $false)]
         [ValidateSet('Ensure', 'Absent')]
-        [string] $Ensure = 'Present',
+        [string]
+        $Ensure = 'Present',
 
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [string] $PolicyName,
+        [string]
+        $PolicyName,
 
         [Parameter(Mandatory = $true)]
         [AllowEmptyString()]
-        [string] $PolicyValue,
+        [string]
+        $PolicyValue,
 
         [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
-        [string] $FirefoxDirectory = "C:\Program Files\Mozilla Firefox"
+        [string]
+        $FirefoxDirectory = 'C:\Program Files\Mozilla Firefox'
     )
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName DSCR_FileContent
 
-    $MozPolicyPath = Join-Path $FirefoxDirectory "\distribution\policies.json"
+    $MozPolicyPath = Join-Path $FirefoxDirectory '\distribution\policies.json'
 
     $FormattedPolicyValue = & {
         if ([float]::TryParse($PolicyValue, [ref]$null)) {$PolicyValue}
         elseif ([bool]::TryParse($PolicyValue, [ref]$null)) {$PolicyValue.toLower()}
-        else {
+        else
+        {
             [string]$tmp =
-            if($PolicyValue.Trim() -notmatch '^[\[{"].+[\]}"]$'){
+            if ($PolicyValue.Trim() -notmatch '^[\[{"].+[\]}"]$')
+            {
                 '"' + $PolicyValue.Trim() + '"'
             }
-            else{
+            else
+            {
                 $PolicyValue.Trim()
             }
 
-            try {
+            try
+            {
                 ConvertFrom-Json -InputObject $tmp -ErrorAction Stop >$null
                 $tmp
             }
-            catch {
+            catch
+            {
                 throw [System.ArgumentException]::new('The PolicyValue should be valid JSON formatted string.')
             }
         }
@@ -50,23 +59,24 @@ Configuration cFirefoxPolicy
 
     Script Test_FirefoxDirectory
     {
-        GetScript = {
+        GetScript  = {
         }
         TestScript = {
-            if(-not (Test-Path (Join-Path $using:FirefoxDirectory 'Firefox.exe') -PathType Leaf)){
+            if (-not (Test-Path (Join-Path $using:FirefoxDirectory 'Firefox.exe') -PathType Leaf))
+            {
                 Write-Warning ('"FireFox.exe" does not exist in "{0}". Please confirm FirefoxDirectory' -f $using:FirefoxDirectory)
             }
             $true
         }
-        SetScript = {
+        SetScript  = {
         }
     }
 
     JsonFile FirefoxPolicy
     {
-        Ensure  = $Ensure
-        Path    = $MozPolicyPath
-        Key     = "policies/$PolicyName"
-        Value   = $FormattedPolicyValue
+        Ensure = $Ensure
+        Path   = $MozPolicyPath
+        Key    = "policies/$PolicyName"
+        Value  = $FormattedPolicyValue
     }
 }

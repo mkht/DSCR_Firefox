@@ -1,4 +1,4 @@
-﻿Configuration cFirefoxPrefs
+Configuration cFirefoxPrefs
 {
     # help about autoconfig
     # https://www.mozilla.jp/business/faq/tech/setting-management/
@@ -6,30 +6,35 @@
     (
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
-        [string] $PrefName,
+        [string]
+        $PrefName,
 
         [Parameter(Mandatory)]
         [AllowEmptyString()]
-        [string] $PrefValue,
+        [string]
+        $PrefValue,
 
         [Parameter()]
         [ValidateSet('pref', 'defaultPref', 'lockPref', 'clearPref', 'LocalizablePreferences')]
-        [string] $PrefType = 'pref',
+        [string]
+        $PrefType = 'pref',
 
         [Parameter()]
         [ValidatePattern('.+\.cfg$')]
-        [string] $CfgFileName = "autoconfig.cfg",
+        [string]
+        $CfgFileName = 'autoconfig.cfg',
 
         [Parameter()]
         [ValidateNotNullOrEmpty()]
-        [string] $FirefoxDirectory = "C:\Program Files\Mozilla Firefox"
+        [string]
+        $FirefoxDirectory = 'C:\Program Files\Mozilla Firefox'
     )
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName DSCR_FileContent
 
-    $MozIniPath = Join-Path $FirefoxDirectory "\distribution\distribution.ini"
-    $MozPrefJsPath = Join-Path $FirefoxDirectory "\defaults\pref\autoconfig.js"
+    $MozIniPath = Join-Path $FirefoxDirectory '\distribution\distribution.ini'
+    $MozPrefJsPath = Join-Path $FirefoxDirectory '\defaults\pref\autoconfig.js'
     $MozPrefCfgPath = Join-Path $FirefoxDirectory $CfgFileName
 
     $FormattedPrefValue = & {
@@ -38,10 +43,12 @@
         else {"`"$PrefValue`""}
     }
 
-    $PrefLine = if ($PrefType -eq 'clearPref') {
+    $PrefLine = if ($PrefType -eq 'clearPref')
+    {
         ('{0}("{1}");' -f $PrefType, $PrefName)
     }
-    else {
+    else
+    {
         ('{0}("{1}", {2});' -f $PrefType, $PrefName, $FormattedPrefValue)
     }
 
@@ -53,19 +60,21 @@
 
     Script Test_FireFoxDirectory
     {
-        GetScript = {
+        GetScript  = {
         }
         TestScript = {
-            if(-not (Test-Path (Join-Path $using:FirefoxDirectory 'FireFox.exe') -PathType Leaf)){
+            if (-not (Test-Path (Join-Path $using:FirefoxDirectory 'FireFox.exe') -PathType Leaf))
+            {
                 Write-Warning ('"FireFox.exe" does not exist in "{0}". Please confirm FireFoxDirectory' -f $using:FirefoxDirectory)
             }
             $true
         }
-        SetScript = {
+        SetScript  = {
         }
     }
 
-    if (($PrefType -eq 'pref') -or ($PrefType -eq 'LocalizablePreferences')) {
+    if (($PrefType -eq 'pref') -or ($PrefType -eq 'LocalizablePreferences'))
+    {
         IniFile Global_Id
         {
             Ensure   = 'Present'
@@ -95,7 +104,8 @@
         }
     }
 
-    if ($PrefType -eq 'pref') {
+    if ($PrefType -eq 'pref')
+    {
         IniFile Prefs
         {
             Ensure   = 'Present'
@@ -106,7 +116,8 @@
             Encoding = 'UTF8'
         }
     }
-    elseif ($PrefType -eq 'LocalizablePreferences') {
+    elseif ($PrefType -eq 'LocalizablePreferences')
+    {
         IniFile LocalizedPrefs
         {
             Ensure   = 'Present'
@@ -117,8 +128,10 @@
             Encoding = 'UTF8'
         }
     }
-    else {
-        File autoconfig_js {
+    else
+    {
+        File autoconfig_js
+        {
             DestinationPath = $MozPrefJsPath
             Contents        = @"
 pref("general.config.filename", "$CfgFileName");
@@ -127,9 +140,11 @@ pref("general.config.obscure_value", 0);
 "@
         }
 
-        Script autoconfig_cfg {
+        Script autoconfig_cfg
+        {
             SetScript  = {
-                if (-not (Test-Path $using:MozPrefCfgPath)) {
+                if (-not (Test-Path $using:MozPrefCfgPath))
+                {
                     New-Item -Path $using:MozPrefCfgPath -ItemType File -Force
                     '//The first line must be a comment' | Out-File $using:MozPrefCfgPath -Encoding utf8
                 }

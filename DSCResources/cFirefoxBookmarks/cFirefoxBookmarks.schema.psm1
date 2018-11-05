@@ -1,4 +1,4 @@
-﻿Configuration cFirefoxBookmarks
+Configuration cFirefoxBookmarks
 {
     # help about bookmarks
     # https://www.mozilla.jp/business/faq/tech/customize-defaults/#faq2
@@ -6,42 +6,51 @@
     (
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
-        [string] $Title,
+        [string]
+        $Title,
 
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
-        [string] $Link,
+        [string]
+         $Link,
 
         [Parameter()]
         [ValidateRange(1, 99)]
-        [int] $Position = 1,
+        [int]
+         $Position = 1,
 
         [Parameter()]
         [ValidateNotNullOrEmpty()]
-        [string] $BookmarksLocation = 'BookmarksMenu', # BookmarksMenu / BookmarksToolbar / BookmarksFolder-(FolderId)
+        [string]
+         $BookmarksLocation = 'BookmarksMenu', # BookmarksMenu / BookmarksToolbar / BookmarksFolder-(FolderId)
 
         [Parameter()]
         [ValidateSet('link', 'separator', 'folder')]
-        [string] $Type = 'link',
+        [string]
+         $Type = 'link',
 
         [Parameter()]
-        [string] $IconUrl,
+        [string]
+        $IconUrl,
 
         [Parameter()]
-        [string] $IconData,
+        [string]
+        $IconData,
 
         [Parameter()]
-        [int] $FolderId = 1,
+        [int]
+        $FolderId = 1,
 
         [Parameter()]
         [ValidateNotNullOrEmpty()]
-        [string] $FirefoxDirectory = "C:\Program Files\Mozilla Firefox"
+        [string]
+        $FirefoxDirectory = 'C:\Program Files\Mozilla Firefox'
     )
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName DSCR_FileContent
 
-    $MozIniPath = Join-Path $FirefoxDirectory "\distribution\distribution.ini"
+    $MozIniPath = Join-Path $FirefoxDirectory '\distribution\distribution.ini'
 
     $Global = @{
         id      = 'DSC-Customized'
@@ -49,11 +58,13 @@
         about   = 'DSC-Customized'
     }
 
-    Script Test_FireFoxDirectory {
+    Script Test_FireFoxDirectory
+    {
         GetScript  = {
         }
         TestScript = {
-            if (-not (Test-Path (Join-Path $using:FirefoxDirectory 'FireFox.exe') -PathType Leaf)) {
+            if (-not (Test-Path (Join-Path $using:FirefoxDirectory 'FireFox.exe') -PathType Leaf))
+            {
                 Write-Warning ('"FireFox.exe" does not exist in "{0}". Please confirm FireFoxDirectory' -f $using:FirefoxDirectory)
             }
             $true
@@ -71,6 +82,7 @@
         Section  = 'Global'
         Encoding = 'UTF8'
     }
+
     IniFile Global_version
     {
         Ensure   = 'Present'
@@ -80,6 +92,7 @@
         Section  = 'Global'
         Encoding = 'UTF8'
     }
+
     IniFile Global_about
     {
         Ensure   = 'Present'
@@ -89,6 +102,7 @@
         Section  = 'Global'
         Encoding = 'UTF8'
     }
+
     IniFile Global_bookmarks
     {
         Ensure   = 'Present'
@@ -99,7 +113,8 @@
         Encoding = 'UTF8'
     }
 
-    if ($Type -eq 'link') {
+    if ($Type -eq 'link')
+    {
         IniFile Bookmarks_Title
         {
             Ensure   = 'Present'
@@ -118,7 +133,8 @@
             Section  = $BookmarksLocation
             Encoding = 'UTF8'
         }
-        if ($IconUrl) {
+        if ($IconUrl)
+        {
             IniFile Bookmarks_Icon
             {
                 Ensure   = 'Present'
@@ -129,7 +145,8 @@
                 Encoding = 'UTF8'
             }
         }
-        if ($IconData) {
+        if ($IconData)
+        {
             IniFile Bookmarks_IconData
             {
                 Ensure   = 'Present'
@@ -142,7 +159,8 @@
         }
     }
 
-    if ($Type -eq 'separator') {
+    if ($Type -eq 'separator')
+    {
         IniFile Bookmarks_Separator
         {
             Ensure   = 'Present'
@@ -154,7 +172,8 @@
         }
     }
 
-    if ($Type -eq 'folder') {
+    if ($Type -eq 'folder')
+    {
         IniFile Bookmarks_Folder
         {
             Ensure   = 'Present'

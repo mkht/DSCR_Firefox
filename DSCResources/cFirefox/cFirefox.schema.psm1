@@ -1,4 +1,4 @@
-﻿Configuration cFirefox
+Configuration cFirefox
 {
     param
     (
@@ -9,12 +9,12 @@
 
         [Parameter()]
         [string]
-        $Language = "en-US",
+        $Language = 'en-US',
 
         [Parameter()]
-        [ValidateSet("x86", "x64")]
+        [ValidateSet('x86', 'x64')]
         [string]
-        $MachineBits = "x86",
+        $MachineBits = 'x86',
 
         [Parameter()]
         [string]
@@ -22,7 +22,7 @@
 
         [Parameter()]
         [string]
-        $LocalPath = "$env:SystemDrive\Windows\temp\DtlDownloads\Firefox Setup " + $VersionNumber + ".exe",
+        $LocalPath = "$env:SystemDrive\Windows\temp\DtlDownloads\Firefox Setup " + $VersionNumber + '.exe',
 
         [Parameter()]
         [string]
@@ -67,46 +67,54 @@
 
     Import-DscResource -ModuleName DSCR_Application
 
-    if ($MachineBits -eq "x64") {
-        $OS = "win64"
+    if ($MachineBits -eq 'x64')
+    {
+        $OS = 'win64'
     }
-    else {
-        $OS = "win32"
+    else
+    {
+        $OS = 'win32'
     }
 
     $IniPath = "$env:SystemDrive\Windows\temp\DtlDownloads\Configuration.ini"
     [string[]]$IniContent = @(
-        "[Install]",
-        ("QuickLaunchShortcut=" + $QuickLaunchShortcut.ToString().toLower()),
-        ("DesktopShortcut=" + $DesktopShortcut.ToString().toLower()),
-        ("TaskbarShortcut=" + $TaskbarShortcut.ToString().toLower()),
-        ("MaintenanceService=" + $MaintenanceService.ToString().toLower()),
-        ("StartMenuShortcuts=" + $StartMenuShortcuts.ToString().toLower()),
-        ("StartMenuDirectoryName=" + $StartMenuDirectoryName),
-        ("OptionalExtensions=" + $OptionalExtensions.ToString().toLower())
+        '[Install]',
+        ('QuickLaunchShortcut=' + $QuickLaunchShortcut.ToString().toLower()),
+        ('DesktopShortcut=' + $DesktopShortcut.ToString().toLower()),
+        ('TaskbarShortcut=' + $TaskbarShortcut.ToString().toLower()),
+        ('MaintenanceService=' + $MaintenanceService.ToString().toLower()),
+        ('StartMenuShortcuts=' + $StartMenuShortcuts.ToString().toLower()),
+        ('StartMenuDirectoryName=' + $StartMenuDirectoryName),
+        ('OptionalExtensions=' + $OptionalExtensions.ToString().toLower())
     )
 
-    if ($InstallDirectoryName) {
-        $IniContent += ("InstallDirectoryName=" + $InstallDirectoryName)
+    if ($InstallDirectoryName)
+    {
+        $IniContent += ('InstallDirectoryName=' + $InstallDirectoryName)
     }
 
-    if ($InstallDirectoryPath) {
-        $IniContent += ("InstallDirectoryPath=" + $InstallDirectoryPath)
+    if ($InstallDirectoryPath)
+    {
+        $IniContent += ('InstallDirectoryPath=' + $InstallDirectoryPath)
     }
 
-    if (-not $InstallerPath) {
-        $InstallerPath = ("https://ftp.mozilla.org/pub/firefox/releases/{0}/{1}/{2}/Firefox%20Setup%20{0}.exe" -f $VersionNumber, $OS, $Language)
+    if (-not $InstallerPath)
+    {
+        $InstallerPath = ('https://ftp.mozilla.org/pub/firefox/releases/{0}/{1}/{2}/Firefox%20Setup%20{0}.exe' -f $VersionNumber, $OS, $Language)
     }
 
-    if ($VersionNumber -match 'esr') {
+    if ($VersionNumber -match 'esr')
+    {
         $v1 = $VersionNumber.Substring(0, $VersionNumber.IndexOf('esr'))
-        $AppName = ("Mozilla Firefox {0}{1} ({2} {3})" -f $v1, ' ESR', $MachineBits, $Language)
+        $AppName = ('Mozilla Firefox {0}{1} ({2} {3})' -f $v1, ' ESR', $MachineBits, $Language)
     }
-    else {
-        $AppName = ("Mozilla Firefox {0} ({1} {2})" -f $VersionNumber, $MachineBits, $Language)
+    else
+    {
+        $AppName = ('Mozilla Firefox {0} ({1} {2})' -f $VersionNumber, $MachineBits, $Language)
     }
 
-    if ($Credential) {
+    if ($Credential)
+    {
         cApplication Install
         {
             Name          = $AppName
@@ -114,7 +122,8 @@
             Arguments     = "-ms /INI=$IniPath"
             PreAction     = {
                 $parent = (split-path -Path $using:IniPath -Parent)
-                if (-not (Test-Path -Path $parent)) {
+                if (-not (Test-Path -Path $parent))
+                {
                     New-Item -Path $parent -ItemType Directory -Force | Out-Null
                 }
                 $using:IniContent -join "`r`n" | Out-File -FilePath $using:IniPath -Encoding ascii -Force
@@ -123,7 +132,8 @@
             Credential    = $Credential
         }
     }
-    else {
+    else
+    {
         cApplication Install
         {
             Name          = $AppName
@@ -131,7 +141,8 @@
             Arguments     = "-ms /INI=$IniPath"
             PreAction     = {
                 $parent = (split-path -Path $using:IniPath -Parent)
-                if (-not (Test-Path -Path $parent)) {
+                if (-not (Test-Path -Path $parent))
+                {
                     New-Item -Path $parent -ItemType Directory -Force | Out-Null
                 }
                 $using:IniContent -join "`r`n" | Out-File -FilePath $using:IniPath -Encoding ascii -Force

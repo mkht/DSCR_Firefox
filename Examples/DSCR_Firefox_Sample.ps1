@@ -1,4 +1,4 @@
-﻿$output = 'C:\MOF'
+$output = 'C:\MOF'
 Import-Module DSCR_Firefox -force
 
 Configuration DSCR_Firefox_Sample

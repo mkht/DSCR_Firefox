@@ -6,35 +6,42 @@ Configuration cFirefoxBookmarksPolicy
     (
         [Parameter(Mandatory = $false)]
         [ValidateSet('Ensure', 'Absent')]
-        [string] $Ensure = 'Present',
+        [string]
+        $Ensure = 'Present',
 
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [string] $Title,
+        [string]
+        $Title,
 
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [string] $URL,
+        [string]
+        $URL,
 
         [Parameter(Mandatory = $false)]
-        [string] $Favicon,
+        [string]
+        $Favicon,
 
         [Parameter(Mandatory = $false)]
         [ValidateSet('toolbar', 'menu')]
-        [string] $Placement,
+        [string]
+        $Placement,
 
         [Parameter(Mandatory = $false)]
-        [string] $Folder,
+        [string]
+        $Folder,
 
         [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]
-        [string] $FirefoxDirectory = "C:\Program Files\Mozilla Firefox"
+        [string]
+        $FirefoxDirectory = 'C:\Program Files\Mozilla Firefox'
     )
 
     Import-DscResource -ModuleName PSDesiredStateConfiguration
     Import-DscResource -ModuleName DSCR_FileContent
 
-    $MozPolicyPath = Join-Path $FirefoxDirectory "\distribution\policies.json"
+    $MozPolicyPath = Join-Path $FirefoxDirectory '\distribution\policies.json'
 
     $BookmarksPolicyParam = @{
         Title = $Title
@@ -71,7 +78,7 @@ Configuration cFirefoxBookmarksPolicy
     JsonFile BookmarksPolicy {
         Ensure = $Ensure
         Path   = $MozPolicyPath
-        Key    = "policies/Bookmarks"
+        Key    = 'policies/Bookmarks'
         Value  = $FormattedPolicyValue
         Mode   = 'ArrayElement'
     }
