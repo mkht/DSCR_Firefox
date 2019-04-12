@@ -12,7 +12,7 @@
     # RootModule = ''
 
     # このモジュールのバージョン番号です。
-    ModuleVersion        = '1.1.2'
+    ModuleVersion        = '1.1.3'
 
     # サポートされている PSEditions
     # CompatiblePSEditions = @()
@@ -30,7 +30,7 @@
     Copyright            = '(c) 2019 mkht. All rights reserved.'
 
     # このモジュールの機能の説明
-    Description          = 'DSC Resource for managing Firefox'
+    Description          = 'DSC Resource for installing and managing Firefox'
 
     # このモジュールに必要な Windows PowerShell エンジンの最小バージョン
     # PowerShellVersion = ''

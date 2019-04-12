@@ -1,7 +1,7 @@
 DSCR_Firefox
 ====
 
-DSC Resource for managing Firefox
+DSC Resource for installing nad managing Firefox
 
 ----
 ## Installation
@@ -93,7 +93,7 @@ Configuration Example1
     Import-DscResource -ModuleName DSCR_Firefox
     cFirefox Firefox63
     {
-        VersionNumber = "63.0"
+        VersionNumber = "66.0.3"
         Language = "ja"
         Machinebits = "x64"
     }
@@ -313,6 +313,10 @@ Configuration Example1
 
 ----
 ## ChangeLog
+### 1.1.3
+ + [cFirefox] Fixed an issue that some garbage files remain in the `C:\Windows\Temp` folder after configuration.
+ + minor fixes
+
 ### 1.1.2
  + [cFirefoxPrefs] Improved to work properly even if the case of `PrefType` value is incorrect.
  + [cFirefoxPrefs] Fixed issue that the cFirefoxPrefs is not working correctly when the `PrefType` is `defaultPref` or `cleanPref` or `lockPref`.
