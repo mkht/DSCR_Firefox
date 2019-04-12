@@ -1,5 +1,4 @@
 $output = 'C:\MOF'
-Import-Module DSCR_Firefox -force
 
 Configuration DSCR_Firefox_Sample
 {
@@ -7,7 +6,7 @@ Configuration DSCR_Firefox_Sample
 
     cFirefox Firefox_Install
     {
-        VersionNumber        = '63.0'
+        VersionNumber        = '66.0.3'
         Language             = 'ja'
         MachineBits          = 'x64'
         InstallDirectoryPath = 'C:\Firefox'
