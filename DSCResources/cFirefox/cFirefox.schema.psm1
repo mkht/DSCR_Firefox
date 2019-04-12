@@ -76,6 +76,9 @@ Configuration cFirefox
         $OS = 'win32'
     }
 
+    #region Configuration.ini
+    # Create a Configuration.ini file for specifying install options.
+    # https://wiki.mozilla.org/Installer:Command_Line_Arguments
     $IniPath = "$env:SystemDrive\Windows\temp\DtlDownloads\Configuration.ini"
     [string[]]$IniContent = @(
         '[Install]',
@@ -97,9 +100,11 @@ Configuration cFirefox
     {
         $IniContent += ('InstallDirectoryPath=' + $InstallDirectoryPath)
     }
+    #endregion Configuration.ini
 
     if (-not $InstallerPath)
     {
+        # Download an installer from Mozilla
         $InstallerPath = ('https://ftp.mozilla.org/pub/firefox/releases/{0}/{1}/{2}/Firefox%20Setup%20{0}.exe' -f $VersionNumber, $OS, $Language)
     }
 
