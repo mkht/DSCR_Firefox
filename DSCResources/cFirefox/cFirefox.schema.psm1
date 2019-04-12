@@ -75,7 +75,7 @@ Configuration cFirefox
     #region Configuration.ini
     # Create a Configuration.ini file for specifying install options.
     # https://wiki.mozilla.org/Installer:Command_Line_Arguments
-    $IniPath = "$env:SystemDrive\Windows\temp\DtlDownloads\Configuration.ini"
+    $IniPath = "$env:ProgramData\Microsoft\Windows\PowerShell\Configuration\BuiltinProvCache\DSCR_Firefox\Configuration.ini"
     [string[]]$IniContent = @(
         '[Install]',
         ('QuickLaunchShortcut=' + $QuickLaunchShortcut.ToString().toLower()),
