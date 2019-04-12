@@ -22,10 +22,6 @@ Configuration cFirefox
 
         [Parameter()]
         [string]
-        $LocalPath = "$env:SystemDrive\Windows\temp\DtlDownloads\Firefox Setup " + $VersionNumber + '.exe',
-
-        [Parameter()]
-        [string]
         $InstallDirectoryName,
 
         [Parameter()]
