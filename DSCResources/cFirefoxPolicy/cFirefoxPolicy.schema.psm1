@@ -31,7 +31,7 @@ Configuration cFirefoxPolicy
     $MozPolicyPath = Join-Path $FirefoxDirectory '\distribution\policies.json'
 
     $FormattedPolicyValue = & {
-        if ([float]::TryParse($PolicyValue, [ref]$null)) {$PolicyValue}
+        if ([int]::TryParse($PolicyValue, [ref]$null)) {$PolicyValue}
         elseif ([bool]::TryParse($PolicyValue, [ref]$null)) {$PolicyValue.toLower()}
         else
         {

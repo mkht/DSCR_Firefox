@@ -20,6 +20,10 @@ Configuration cFirefoxPrefs
         $PrefType = 'pref',
 
         [Parameter()]
+        [bool]
+        $IsStringValue = $false,
+
+        [Parameter()]
         [ValidatePattern('.+\.cfg$')]
         [string]
         $CfgFileName = 'autoconfig.cfg',
@@ -47,10 +51,17 @@ Configuration cFirefoxPrefs
         'LocalizablePreferences' { 'LocalizablePreferences'; break }
     }
 
-    $FormattedPrefValue = & {
-        if ([float]::TryParse($PrefValue, [ref]$null)) {$PrefValue}
-        elseif ([bool]::TryParse($PrefValue, [ref]$null)) {$PrefValue.toLower()}
-        else {"`"$PrefValue`""}
+    if ($IsStringValue)
+    {
+        $FormattedPrefValue = "`"$PrefValue`""
+    }
+    else
+    {
+        $FormattedPrefValue = & {
+            if ([int]::TryParse($PrefValue, [ref]$null)) { $PrefValue }   #int
+            elseif ([bool]::TryParse($PrefValue, [ref]$null)) { $PrefValue.toLower() }    #bool
+            else { "`"$PrefValue`"" } #string
+        }
     }
 
     $PrefLine = if ($PrefType -eq 'clearPref')

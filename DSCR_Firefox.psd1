@@ -12,7 +12,7 @@
     # RootModule = ''
 
     # このモジュールのバージョン番号です。
-    ModuleVersion        = '1.1.3'
+    ModuleVersion        = '1.2.0'
 
     # サポートされている PSEditions
     # CompatiblePSEditions = @()

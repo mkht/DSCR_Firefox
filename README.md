@@ -179,6 +179,10 @@ Configuration Example1
 + [string] **PrefValue** (Require):
     + The value of the preference.
 
++ [bool] **IsStringValue** (Optional):
+    + When `$true` is specified, the type of preference will always be a string.
+    + The default is `$false` ( The value type will be determined automatically. )
+
 + [string] **PrefType** (Optional):
     + The type of the preference.
     + `pref` / `defaultPref` / `lockPref` / `cleanPref` / `LocalizablePreferences` (Case sensitive!)
@@ -313,6 +317,10 @@ Configuration Example1
 
 ----
 ## ChangeLog
+### 1.2.0
++ [cFirefoxPrefs] Add `IsStringValue` property. When `$true` is specified, the type of preference will always be a string.
++ [cFirefoxPrefs] Fix an issue that incorrect type is set when specifying floating point number in `PrefValue`.
+
 ### 1.1.3
  + [cFirefox] Fixed an issue that some garbage files remain in the `C:\Windows\Temp` folder after configuration.
  + minor fixes
