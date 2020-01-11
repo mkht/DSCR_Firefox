@@ -74,7 +74,7 @@ Configuration cFirefox
 
     #region Configuration.ini
     # Create a Configuration.ini file for specifying install options.
-    # https://wiki.mozilla.org/Installer:Command_Line_Arguments
+    # https://firefox-source-docs.mozilla.org/browser/installer/windows/installer/FullConfig.html
     $IniPath = "$env:ProgramData\Microsoft\Windows\PowerShell\Configuration\BuiltinProvCache\DSCR_Firefox\Configuration.ini"
     [string[]]$IniContent = @(
         '[Install]',
