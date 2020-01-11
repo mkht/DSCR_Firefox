@@ -3,7 +3,7 @@
     ModuleVersion     = '1.0.0'
     GUID              = '0f163f21-cc50-46f9-a86f-68e011af1486'
     Author            = 'mkht'
-    Copyright         = '(c) 2019 mkht. All rights reserved.'
+    Copyright         = '(c) 2020 mkht. All rights reserved.'
     FunctionsToExport = '*'
     CmdletsToExport   = '*'
     VariablesToExport = '*'
