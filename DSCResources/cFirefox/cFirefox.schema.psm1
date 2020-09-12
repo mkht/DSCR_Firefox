@@ -12,9 +12,9 @@ Configuration cFirefox
         $Language = 'en-US',
 
         [Parameter()]
-        [ValidateSet('x86', 'x64')]
+        [ValidateSet('Auto', 'x86', 'x64', 'ARM64')]
         [string]
-        $MachineBits = 'x86',
+        $MachineBits = 'Auto',
 
         [Parameter()]
         [string]
@@ -71,13 +71,28 @@ Configuration cFirefox
 
     Import-DscResource -ModuleName DSCR_Application
 
-    if ($MachineBits -eq 'x64')
+    # Determine os architecture
+    $OS = 'win32'; $Arch = 'x86'
+    switch ($MachineBits)
     {
-        $OS = 'win64'
-    }
-    else
-    {
-        $OS = 'win32'
+        'x86' { $OS = 'win32'; $Arch = 'x86'; break }
+        'x64' { $OS = 'win64'; $Arch = 'x64'; break }
+        'ARM64' { $OS = 'win64-aarch64'; $Arch = 'AArch64'; break }
+        'Auto'
+        {
+            switch (& { if ($env:PROCESSOR_ARCHITEW6432) { $env:PROCESSOR_ARCHITEW6432 } else { $env:PROCESSOR_ARCHITECTURE } })
+            {
+                'AMD64'
+                {
+                    $OS = 'win64'; $Arch = 'x64'; break
+                }
+
+                'ARM64'
+                {
+                    $OS = 'win64-aarch64'; $Arch = 'AArch64'; break
+                }
+            }
+        }
     }
 
     #region Configuration.ini
@@ -117,11 +132,11 @@ Configuration cFirefox
     if ($VersionNumber -match 'esr')
     {
         $v1 = $VersionNumber.Substring(0, $VersionNumber.IndexOf('esr'))
-        $AppName = ('Mozilla Firefox {0}{1} ({2} {3})' -f $v1, ' ESR', $MachineBits, $Language)
+        $AppName = ('Mozilla Firefox {0}{1} ({2} {3})' -f $v1, ' ESR', $Arch, $Language)
     }
     else
     {
-        $AppName = ('Mozilla Firefox {0} ({1} {2})' -f $VersionNumber, $MachineBits, $Language)
+        $AppName = ('Mozilla Firefox {0} ({1} {2})' -f $VersionNumber, $Arch, $Language)
     }
 
     if ($Credential)
