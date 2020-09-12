@@ -326,7 +326,7 @@ Configuration Example1
 
 ----
 ## ChangeLog
-### 2.0.0
+### 2.0.1
 + [cFirefox] ARM64 support (experimental).
 + [cFirefox] No longer necessary to explicitly specify the OS architecture. It will be determined automatically.
 + [cFirefox] Add `RegisterDefaultAgent` and `RemoveDistributionDir` params.
