@@ -6,9 +6,8 @@ Configuration DSCR_Firefox_Sample
 
     cFirefox Firefox_Install
     {
-        VersionNumber        = '66.0.3'
+        VersionNumber        = '79.0'
         Language             = 'ja'
-        MachineBits          = 'x64'
         InstallDirectoryPath = 'C:\Firefox'
     }
 

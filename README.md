@@ -28,15 +28,15 @@ Install Firefox
 
 ### Properties
 + [string] **VersionNumber** (Require):
-    + The version of the Firefox you wish install. e.g) `61.0`
+    + The version of the Firefox you wish install. e.g) `79.0`
 
 + [string] **Language** (Optional):
     + Language of the Firefox.
     + The default is `en-US`
 
 + [string] **MachineBits** (Optional):
-    + Specify the machine's operating system bit number.
-    + The default is `x86`. (`x86` or `x64`)
+    + Specify the machine's operating system architecure. (`Auto` | `x86` | `x64` | `ARM64`)
+    + If you don't specify it, the best one for the system will be selected automatically. 
 
 + [string] **InstallerPath** (Optional):
     + The path of the Firefox installer file.
@@ -327,7 +327,10 @@ Configuration Example1
 ----
 ## ChangeLog
 ### Unrelesed
++ [cFirefox] ARM64 support (experimental).
++ [cFirefox] No longer necessary to explicitly specify the OS architecture. It will be determined automatically.
 + [cFirefox] Add `RegisterDefaultAgent` and `RemoveDistributionDir` params.
++ Updates examples.
 
 ### 1.2.0
 + [cFirefoxPrefs] Add `IsStringValue` property. When `$true` is specified, the type of preference will always be a string.
