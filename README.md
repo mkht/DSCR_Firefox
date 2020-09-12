@@ -80,34 +80,43 @@ Install Firefox
     + The default is `$true`
     + This option can be used in Firefox 60 or later.
 
++ [bool] **RegisterDefaultAgent** (Optional):
+    + Set to `$false` to disable creating a recurring scheduled task to run the default browser agent.
+    + The default is `$true`
+    + This option can be used in Firefox 76 or later.
+
++ [bool] **RemoveDistributionDir** (Optional):
+    + Set to `$false` to disable removing the `distribution` directory from an existing installation that’s being paved over.
+    + By default this is `$true` and the directory is removed.
+
 + [PSCredential] **Credential** (Optional):
     + The credential for access to the installer on a remote source if needed.
     + :warning: If you want to run the installation as a specific user, you need to use `PsDscRunAsCredential` standard property.
 
 
 ### Examples
-+ **Example 1**: Install Firefox 63.0 x64 japanese
++ **Example 1**: Install Firefox 78.0.2 x64 japanese
 ```Powershell
 Configuration Example1
 {
     Import-DscResource -ModuleName DSCR_Firefox
-    cFirefox Firefox63
+    cFirefox Firefox78
     {
-        VersionNumber = "66.0.3"
+        VersionNumber = "78.0.2"
         Language = "ja"
         Machinebits = "x64"
     }
 }
 ```
 
-+ **Example 2**: Install Firefox 60.0 ESR without MozillaMaintenance service
++ **Example 2**: Install Firefox 78.0.2 ESR without MozillaMaintenance service
 ```Powershell
 Configuration Example2
 {
     Import-DscResource -ModuleName DSCR_Firefox
-    cFirefox Firefox60ESR
+    cFirefox Firefox78ESR
     {
-        VersionNumber = "60.0esr"
+        VersionNumber = "78.2.0esr"
         MaintenanceService = $false
     }
 }
@@ -317,6 +326,9 @@ Configuration Example1
 
 ----
 ## ChangeLog
+### Unrelesed
++ [cFirefox] Add `RegisterDefaultAgent` and `RemoveDistributionDir` params.
+
 ### 1.2.0
 + [cFirefoxPrefs] Add `IsStringValue` property. When `$true` is specified, the type of preference will always be a string.
 + [cFirefoxPrefs] Fix an issue that incorrect type is set when specifying floating point number in `PrefValue`.

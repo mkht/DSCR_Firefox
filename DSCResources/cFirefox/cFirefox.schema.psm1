@@ -30,7 +30,7 @@ Configuration cFirefox
 
         [Parameter()]
         [bool]
-        $QuickLaunchShortcut = $false,
+        $QuickLaunchShortcut = $false, #obsoleted
 
         [Parameter()]
         [bool]
@@ -55,6 +55,14 @@ Configuration cFirefox
         [Parameter()]
         [bool]
         $OptionalExtensions = $true, #only Firefox 60+
+
+        [Parameter()]
+        [bool]
+        $RegisterDefaultAgent = $true, #only Firefox 76+
+
+        [Parameter()]
+        [bool]
+        $RemoveDistributionDir = $true,
 
         [Parameter()]
         [PSCredential]
@@ -85,6 +93,8 @@ Configuration cFirefox
         ('StartMenuShortcuts=' + $StartMenuShortcuts.ToString().toLower()),
         ('StartMenuDirectoryName=' + $StartMenuDirectoryName),
         ('OptionalExtensions=' + $OptionalExtensions.ToString().toLower())
+        ('RegisterDefaultAgent=' + $RegisterDefaultAgent.ToString().toLower())
+        ('RemoveDistributionDir=' + $RemoveDistributionDir.ToString().toLower())
     )
 
     if ($InstallDirectoryName)
