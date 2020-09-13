@@ -1,7 +1,7 @@
 DSCR_Firefox
 ====
 
-DSC Resource for installing nad managing Firefox
+DSC Resource for installing and managing Firefox
 
 ----
 ## Installation
