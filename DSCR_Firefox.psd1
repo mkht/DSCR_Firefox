@@ -12,7 +12,7 @@
     # RootModule = ''
 
     # Version number of this module.
-    ModuleVersion        = '2.0.1'
+    ModuleVersion        = '2.0.2'
 
     # サポートされている PSEditions
     # CompatiblePSEditions = @()
@@ -27,7 +27,7 @@
     # CompanyName = 'Unknown'
 
     # このモジュールの著作権情報
-    Copyright            = '(c) 2020 mkht. All rights reserved.'
+    Copyright            = '(c) 2021 mkht. All rights reserved.'
 
     # このモジュールの機能の説明
     Description          = 'DSC Resource for installing and managing Firefox'
