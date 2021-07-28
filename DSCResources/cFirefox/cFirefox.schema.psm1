@@ -129,6 +129,14 @@ Configuration cFirefox
         $InstallerPath = ('https://ftp.mozilla.org/pub/firefox/releases/{0}/{1}/{2}/Firefox%20Setup%20{0}.exe' -f $VersionNumber, $OS, $Language)
     }
 
+    # Validate version string
+    [System.Version]$TargetVersion = $null
+    if (-not [System.Version]::TryParse(($VersionNumber -replace '[^\d\.]', ''), [ref]$TargetVersion))
+    {
+        Write-Error -Message 'VersionNumber is not valid format of values.'
+        return
+    }
+
     if ($VersionNumber -match 'esr')
     {
         $v1 = $VersionNumber.Substring(0, $VersionNumber.IndexOf('esr'))
@@ -136,7 +144,15 @@ Configuration cFirefox
     }
     else
     {
-        $AppName = ('Mozilla Firefox {0} ({1} {2})' -f $VersionNumber, $Arch, $Language)
+        # The format of the application name changed from 90.0
+        if ($TargetVersion -ge [version]::new(90, 0))
+        {
+            $AppName = ('Mozilla Firefox ({0} {1})' -f $Arch, $Language)
+        }
+        else
+        {
+            $AppName = ('Mozilla Firefox {0} ({1} {2})' -f $VersionNumber, $Arch, $Language)
+        }
     }
 
     if ($Credential)
@@ -144,6 +160,7 @@ Configuration cFirefox
         cApplication Install
         {
             Name          = $AppName
+            Version       = ($TargetVersion.ToString())
             InstallerPath = $InstallerPath
             Arguments     = "-ms /INI=$IniPath"
             PreAction     = {
@@ -163,6 +180,7 @@ Configuration cFirefox
         cApplication Install
         {
             Name          = $AppName
+            Version       = ($TargetVersion.ToString())
             InstallerPath = $InstallerPath
             Arguments     = "-ms /INI=$IniPath"
             PreAction     = {
