@@ -33,26 +33,17 @@ Configuration cFirefoxPolicy
     $FormattedPolicyValue = & {
         if ([int]::TryParse($PolicyValue, [ref]$null)) {$PolicyValue}
         elseif ([bool]::TryParse($PolicyValue, [ref]$null)) {$PolicyValue.toLower()}
+        elseif ($PolicyValue -ceq 'null') {$PolicyValue}
         else
         {
-            [string]$tmp =
-            if ($PolicyValue.Trim() -notmatch '^[\[{"].+[\]}"]$')
-            {
-                '"' + $PolicyValue.Trim() + '"'
-            }
-            else
-            {
-                $PolicyValue.Trim()
-            }
-
             try
             {
-                ConvertFrom-Json -InputObject $tmp -ErrorAction Stop >$null
-                $tmp
+                ConvertFrom-Json -InputObject ($PolicyValue.Trim()) -ErrorAction Stop >$null
+                $PolicyValue.Trim()
             }
             catch
             {
-                throw [System.ArgumentException]::new('The PolicyValue should be valid JSON formatted string.')
+                $PolicyValue
             }
         }
     }
