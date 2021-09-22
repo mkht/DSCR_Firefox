@@ -35,7 +35,7 @@ Install Firefox
     + The default is `en-US`
 
 + [string] **MachineBits** (Optional):
-    + Specify the machine's operating system architecure. (`Auto` | `x86` | `x64` | `ARM64`)
+    + Specify the machine's operating system architecture. (`Auto` | `x86` | `x64` | `ARM64`)
     + If you don't specify it, the best one for the system will be selected automatically. 
 
 + [string] **InstallerPath** (Optional):
@@ -326,6 +326,9 @@ Configuration Example1
 
 ----
 ## ChangeLog
+### 2.0.3
++ [cFirefoxPolicy] Fixed an issue where JSON strings containing newlines were not parsed correctly.
+
 ### 2.0.2
 + [cFirefox] Firefox 90.0 or later support.
 
